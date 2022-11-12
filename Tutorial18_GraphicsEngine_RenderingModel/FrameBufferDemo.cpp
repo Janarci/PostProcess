@@ -91,7 +91,7 @@ void FrameBufferDemo::onCreate()
 
 	m_mat = GraphicsEngine::get()->createMaterial(L"VertexShader.hlsl", L"PixelShader.hlsl");
 	m_mat->addTexture(m_wood_tex);
-	m_mat->setCullMode(CULL_MODE_FRONT);
+	m_mat->setCullMode(CULL_MODE_BACK);
 
 	m_monitor_mat = GraphicsEngine::get()->createMaterial(L"VertexShader.hlsl", L"PixelShader.hlsl");
 	m_monitor_mat->addTexture(m_wood_tex);

@@ -12,7 +12,6 @@ struct PS_INPUT
 
 float2 distort(float2 p)
 {
-	const float2 copy = p;
 	float theta = atan2(p.y, p.x);
 
 	float radius = length(p);
@@ -23,7 +22,7 @@ float2 distort(float2 p)
 	p.x = radius * sin(theta);
 
 
-	return copy;
+	return 0.5 * (p + 1.0);
 }
 
 float4 psmain(PS_INPUT input) : SV_TARGET

@@ -12,6 +12,7 @@ struct PS_INPUT
 
 float2 distort(float2 p)
 {
+	const float2 copy = p;
 	float theta = atan2(p.y, p.x);
 
 	float radius = length(p);
@@ -22,7 +23,7 @@ float2 distort(float2 p)
 	p.x = radius * sin(theta);
 
 
-	return 0.5 * (p + 1.0);
+	return copy;
 }
 
 float4 psmain(PS_INPUT input) : SV_TARGET
@@ -35,15 +36,18 @@ float4 psmain(PS_INPUT input) : SV_TARGET
 	if (d < 1.0)
 	{
 		uv = distort(xy);
+		float4 color = Texture.Sample(TextureSampler, uv);
+		return color;
 		//return color
 	}
 	else
 	{
 		uv = input.texcoord.xy;
+		float4 color = Texture.Sample(TextureSampler, uv);
+		return float4(1, 0, 1, 1) * color;
 		//return float4(1, 0, 1, 1) * color;
 
 	}
 
-	float4 color = Texture.Sample(TextureSampler, uv);
-	return color;
+	
 }

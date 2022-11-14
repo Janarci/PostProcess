@@ -32,14 +32,21 @@ float4 psmain(PS_INPUT input) : SV_TARGET
 	float d = length(xy);
 
 
+	
 	uv = input.texcoord.xy;
 
 
-	//float4 color = Texture.Sample(TextureSampler, uv);
+	float4 color = Texture.Sample(TextureSampler, uv);
+
+	uv *= 1.0 - uv.yx;
+
 
 	float vig = uv.x * uv.y * 15.0;
-	vig = pow(vig, 0.25);
-	const float4 color = { vig, vig	, vig, vig };
+	vig = pow(vig, 0.75);
+	//const float4 color = {uv.x, uv.y, 0, vig };
+	const float4 vigColor = color * vig;
 
-	return color;
+	
+
+	return vigColor;
 }

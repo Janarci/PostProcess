@@ -68,6 +68,7 @@ void FrameBufferDemo::onCreate()
 	int width = rc.right - rc.left;
 	int height = rc.bottom - rc.top;
 
+	std::cout << width << " " << height;
 	m_swap_chain = GraphicsEngine::get()->getRenderSystem()->createSwapChain(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
 	m_world_cam.setTranslation(Vector3D(0, 0, -2));
@@ -98,7 +99,7 @@ void FrameBufferDemo::onCreate()
 	m_screen_mat = GraphicsEngine::get()->createMaterial(L"VertexShader.hlsl", L"PixelShader.hlsl");
 	m_screen_mat->addTexture(screen_tex);
 
-	m_post_process_mat = GraphicsEngine::get()->createMaterial(L"PostProcessVS.hlsl", L"DistortionEffect.hlsl");
+	m_post_process_mat = GraphicsEngine::get()->createMaterial(L"PostProcessVS.hlsl", L"Distort.hlsl");
 	m_post_process_mat->setCullMode(CULL_MODE_BACK);
 
 	VertexMesh quad_vertex_list[] = {
